@@ -1,18 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <div class="container">
+    <!-- 轮播图 -->
+      <Banner></Banner>
+      <div class="home-for" v-for="(item,index) in $router.options.routes" :key="index">
+        <div v-for="(item,index) in item.children" :key="index">        
+          <router-link :to="`${item.path}`">{{item.name}}</router-link>  
+        </div>
+      </div>
+      <router-view></router-view>  
+ </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Banner from '../components/Banner.vue'
+
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+   Banner,
   }
 }
 </script>
+
+<style>
+  .home-for{
+    display:flex;
+    justify-content: space-between;
+    /* position:fixed;
+    bottom:0; */
+  }
+</style>
+

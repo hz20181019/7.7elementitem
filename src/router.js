@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Table from './components/Table.vue'
+import List from './views/List.vue'
+ 
 
 Vue.use(Router)
 
@@ -11,15 +14,40 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component:Home,  
+      children:[
+        {
+        path:"/table",                
+            // component:() => import('./components/Table.vue'),
+        name:"表格",
+        component:Table, 
+        },
+        {
+          path:"/List",
+          name:"轮播",
+          component:List, 
+        }
+    ]
     }
+    // {
+    //   path: '/list',
+    //   name: 'list',
+    //   component:() => import('./views/List.vue')   
+    // },
+    // {
+    //   path: '/cart',
+    //   name: 'cart',
+    //   component:() => import('./views/Cart.vue') 
+    // },
+    // {
+    //   path: '/profile',
+    //   name: 'profile',
+    //   component:() => import('./views/Profile.vue') 
+    // },
+    // {
+    //   path: '/shouye',
+    //   name: 'shouye',
+    //   component:() => import('./views/shouye.vue') 
+    // }
   ]
 })
